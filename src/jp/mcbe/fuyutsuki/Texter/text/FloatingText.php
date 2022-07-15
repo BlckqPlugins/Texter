@@ -14,7 +14,6 @@ use pocketmine\entity\Skin;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\convert\SkinAdapterSingleton;
 use pocketmine\network\mcpe\protocol\AddPlayerPacket;
-use pocketmine\network\mcpe\protocol\AdventureSettingsPacket;
 use pocketmine\network\mcpe\protocol\ClientboundPacket;
 use pocketmine\network\mcpe\protocol\MoveActorAbsolutePacket;
 use pocketmine\network\mcpe\protocol\PlayerListPacket;
@@ -29,6 +28,7 @@ use pocketmine\network\mcpe\protocol\types\entity\StringMetadataProperty;
 use pocketmine\network\mcpe\protocol\types\inventory\ItemStack;
 use pocketmine\network\mcpe\protocol\types\inventory\ItemStackWrapper;
 use pocketmine\network\mcpe\protocol\types\PlayerListEntry;
+use pocketmine\network\mcpe\protocol\UpdateAbilitiesPacket;
 use pocketmine\player\GameMode;
 use pocketmine\player\Player;
 use pocketmine\world\World;
@@ -125,10 +125,9 @@ class FloatingText implements Sendable {
 					$uuid,
 					$this->replaceVariables($player),
 					$this->actorRuntimeId,
-					$this->actorRuntimeId,
 					"",
 					$this->position,
-					null,
+					$this->position,
 					0.0,
 					0.0,
 					0.0,
@@ -140,7 +139,7 @@ class FloatingText implements Sendable {
 						]),
 						EntityMetadataProperties::SCALE => new FloatMetadataProperty(0.0),
 					],
-					AdventureSettingsPacket::create(0, 0, 0, 0, 0, $this->actorRuntimeId),
+					UpdateAbilitiesPacket::create(0, 0, $this->actorRuntimeId, []),
 					[],
 					"",
 					DeviceOS::UNKNOWN

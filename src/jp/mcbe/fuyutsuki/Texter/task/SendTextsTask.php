@@ -30,7 +30,7 @@ class SendTextsTask extends Task {
 	}
 
 	public function onRun(): void {
-		if (empty($this->remain)) {
+		if (empty($this->remain) || !$this->target->isConnected()) {
 			$this->onSuccess();
 		}else {
 			$floatingText = array_shift($this->remain);
